@@ -1,7 +1,9 @@
 const Inky = require('inky').Inky;
 const cheerio = require('cheerio');
 
-const transform = (input = "", options = {}) => {
+const transform = (input, options) => {
+    const input = input || "";
+    const options = options || {};
     const i = new Inky(options);
     const html = cheerio.load(input);
     return i.releaseTheKraken(html);
