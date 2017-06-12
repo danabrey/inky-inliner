@@ -1,7 +1,7 @@
 const juice = require("juice");
 
 const inline = (input) => {
-    const input  = input || "";
+    let input = input || "";
     return juice(input);
 };
 
