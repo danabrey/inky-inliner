@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+    <title>inky-inliner</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">inky-inliner</h1>
+        <p class="lead">Transforms Inky template HTML and inlines CSS, via an HTTP endpoint.</p>
+    </div>
+
+    <h2>Input</h2>
+
+    <div class="">
+        <form id="inky-inline">
+            <textarea id="input" class="form-control" rows="10"></textarea>
+            <button type="submit">inky-inline</button>
+        </form>
+    </div>
+
+    <h2>Output</h2>
+
+    <pre><code id="output">
+
+    </code></pre>
+
+    <footer class="footer">
+        <p>&copy; Dan Abrey 2017</p>
+    </footer>
+
+</div>
+<script>
+    function inkyInline(input, callback) {
+        $.ajax({
+            url: "/",
+            type: "POST",
+            data: JSON.stringify({ input: input }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) {
+                callback(data);
+            }
+        });
+    }
+
+    $("#inky-inline").submit(function(e) {
+        e.preventDefault();
+        var input = $("#input").val();
+        inkyInline(input, function(response) {
+            if (response.success) {
+                $("#output").text(response.html);
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

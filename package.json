@@ -1,0 +1,18 @@
+{
+  "name": "inky-inliner",
+  "version": "1.0.0",
+  "description": "An HTTP server that transforms Inky email markup and inlines CSS on the fly.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.1",
+    "express": "^4.15.3",
+    "inky": "^1.3.7",
+    "juice": "^4.1.0"
+  }
+}
